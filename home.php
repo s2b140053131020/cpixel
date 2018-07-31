@@ -1,49 +1,48 @@
-<?php 
-include('session.php'); 
-
-include('dbcon.php');
-
- ?>
 <?php
-   if(isset($_FILES['e_file'])){
-      $file_name = $_FILES['e_file']['name'];
-      $file_size =$_FILES['e_file']['size'];
-      $file_tmp =$_FILES['e_file']['tmp_name'];
-      $file_type=$_FILES['e_file']['type'];
-      $file_ext=strtolower(end(explode('.',$_FILES['e_file']['name'])));      
-      $expensions= array("xlsx","jpg","php");
-      if(in_array($file_ext,$expensions)=== false){
-         $errors="Please choose Only Xlsx.";
-      }
-      if($file_size > 20897152){
-         $errors='File size must be excately 20 MB';
-      }
-      if(empty($errors)==true){
-		  $file_name = rand(0,1000).'-'.$file_name;
-		 $new_path = "file/".$file_name;
-         move_uploaded_file($file_tmp,$new_path);
-
-         $success = "uploaded ";
-		 unset($_FILES['e_file']);
-      }else{
-      }
-   }
+session_start();
+require_once('connect.php');
+if(!isset($_SESSION['username']) & empty($_SESSION['username'])){
+  header('location: login.php');
+}
+$username = $_SESSION['username'];
 ?>
+
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="style.css">
+<title>upload File</title>
+<!-- Latest compiled and minified CSS -->
+<?php require_once('include_link.php');?>
 </head>
 <body>
-<div class="form-wrapper">
-<span class ="error_message"><?php echo isset($errors)?$errors : '' ?></span>
-<span class ="sucess_message"><?php echo isset($success)?$success : '' ?></span>
-<form action="" method="POST" enctype="multipart/form-data">
-<div class="file-upload">
-    <label for="upload" class="file-upload__label">File upload</label>
-    <input id="upload" class="file-upload__input" type="file" name="e_file">
-</div>
- <input type="submit" class= "submit-btn"/>
-</form>
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">User Area</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $username; ?> <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="logout.php">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container">
+	<div class="col-sm-9">
+<a href="get_content.php">upload url</a>
+	</div>
 </div>
 </body>
 </html>
