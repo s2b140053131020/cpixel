@@ -45,7 +45,7 @@ $username = $_SESSION['username'];
 	</div> -->
 	<div class="col-sm-9">
     <form class="form-signin" method="POST">
-      <h2 class="form-signin-heading">Please Login</h2>
+      <h2 class="form-signin-heading">UPLOAD URL</h2>
       <div class="input-group">
       <span class="input-group-addon" id="basic-addon1">URL</span></br>
         <input type="text" name="url" id="URL" class="form-control" placeholder="URL" required>
