@@ -19,7 +19,7 @@ if(isset($_POST) & !empty($_POST)){
 
   if($count == 1){
     $_SESSION['username'] = $username;
-    header('location: login.php');
+    header('location: index.php');
   }else{
     $fmsg = "User does not exist";
   }
@@ -29,8 +29,7 @@ if(isset($_POST) & !empty($_POST)){
 <head>
 <title>User Login Script in PHP & MySQL</title>
 <!-- Latest compiled and minified CSS -->
-<?php require_once('include_link.php');?>
-
+<?php require_once('function/include_link.php');?>
 </head>
 <body>
 	<div class="container">

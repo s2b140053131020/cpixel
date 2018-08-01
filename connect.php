@@ -7,4 +7,5 @@ $dbselect = mysqli_select_db($connection, "user_db");
 if(!$dbselect){
 	echo "Failed to Select database" . die(mysqli_error($connection));
 }
+error_reporting(0);
 ?>
