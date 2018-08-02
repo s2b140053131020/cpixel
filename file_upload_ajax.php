@@ -22,7 +22,7 @@ if(isset($_FILES['e_file'])){
        //include database configuration file
         require_once('connect.php'); 
         //insert form data in the database
-        $insert = $connection->query("INSERT form_data (file_name) VALUES ('".$new_path."')");
+        $insert = $connection->query("INSERT form_data (file_name) VALUES ('".$file_name."')");
          echo $insert?$file_name:'err';
     }else{
     }

@@ -1,6 +1,5 @@
 <?php
 session_start();
-require_once 'connect.php';
 if (!isset($_SESSION['username']) & empty($_SESSION['username'])) {
     header('location: index.php');
 }
@@ -13,6 +12,8 @@ $username = $_SESSION['username'];
 <!-- Latest compiled and minified CSS -->
 <?php require_once 'function/include_link.php';?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css" >
 </head>
 <body>
 
@@ -25,38 +26,59 @@ $username = $_SESSION['username'];
     <form enctype="multipart/form-data" id="fupForm" >
         <div class="form-group">
             <input type="file" class="form-control" id="file" name="e_file"style="display:inline-block; width:80%" required />
-            <input type="submit" name="submit" class="btn btn-danger submitBtn"style="display:inline-block;" value="SAVE"/>
+            <input type="submit" name="submit" class="btn btn-danger submitBtn"style="display:inline-block;" value="UPLOAD"/>
         </div>
     </form>
     <button class="btn btn-success" id ="get_start" filename="119-abc.csv" >Start Process</button>
-        </div>
+
+<div id ="pbar" class="progress">
+  <div class="progress-bar progress-bar-striped active" role="progressbar"
+  aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+  processing.....
+  </div>
+</div>	
+</div>
     
 </div>
 <div class="row">
 <div class="col-sm-2"></div>
 <div class="col-sm-10">
 <hr>
-<h2>Uploded</h2>
+<h2>Uploded File </h2>
 <hr>
-<table class="table table-hover">
+<table id="resultdata" class="table table-striped table-bordered" style="width:100%">
       <thead>
         <tr>
           <th>#</th>
           <th>File Name</th>
           <th>Status</th>
           <th>Download</th>
+		  <th>Date</th>
         </tr>
       </thead>
       <tbody>
+	  <?php 
+  require_once 'connect.php';  
+	$sql = "SELECT * FROM `form_data`  ORDER BY `create_at` DESC";
+    $res = mysqli_query($connection, $sql);
+	$i=1;
+	while($row = mysqli_fetch_assoc($res)){
+ 	  ?>
         <tr>
-          <th scope="row">1</th>
-          <td>fb</td>
-          <td>progress</td>
-          <td><a href="#">download</a></td>
+          <th scope="row"><?php  echo $i; ?></th>
+          <td><?php  echo $row['file_name']; ?></td>
+          <td class ="text-success">Done</td>
+          <td><a href="file/<?php  echo $row['file_name']; ?>"><img src="img/dwn.ico" class="dwn"></a></td>
+		   <td><?php  echo $row['create_at']; ?></td>
         </tr>
-
+		
+<?php 
+$i++;
+}
+?>
       </tbody>
     </table>
+	
 </div>
 </div>
 </body>
@@ -84,7 +106,7 @@ $(document).ready(function(e){
                     $('#get_start').show(100);
                     $('#get_start').attr( "filename",msg);
                     $('#fupForm')[0].reset();
-                    $('.statusMsg').html('<span style="font-size:18px;color:#34A853">Form data submitted successfully.</span>');
+                    $('.statusMsg').html('<span style="font-size:18px;color:#34A853">File Uploaded successfully.</span>');
 
                 }
                 $('#fupForm').css("opacity","");
@@ -94,9 +116,10 @@ $(document).ready(function(e){
     });
 
 $('#get_start').click(function(){
-    $('.get_start').attr("disabled","disabled");
+    $('#get_start').attr("disabled","disabled");
     $('#get_start').css("opacity",".5");
-var fname = $(this).attr( "filename");
+	$('#pbar').show(100);
+var fname = $('#get_start').attr( "filename");
 $.ajax
 ({
     url: 'readfile.php',
@@ -104,9 +127,11 @@ $.ajax
     type: 'post',
     success: function(result)
     {
+		$('#pbar').hide(100);
         $('#get_start').hide(1000);
         $('#get_start').css("opacity","");
         $(".get_start").removeAttr("disabled");
+		location.reload(true);
     }
 });
 });
@@ -126,4 +151,7 @@ $.ajax
         }
     });
 });
+$(document).ready(function() {
+    $('#resultdata').DataTable();
+} );
 </script>

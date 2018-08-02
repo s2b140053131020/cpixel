@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 02, 2018 at 01:13 AM
+-- Generation Time: Aug 02, 2018 at 11:48 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -28,15 +28,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `form_data` (
   `id` int(11) NOT NULL,
-  `file_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL
+  `file_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `create_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `form_data`
---
-
-INSERT INTO `form_data` (`id`, `file_name`) VALUES
-(1, 'file/2018-08-02-12-07-2018-08-01-08-53-119-abc.csv');
 
 -- --------------------------------------------------------
 
@@ -56,7 +51,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `created_at`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', '2018-07-29 18:45:06');
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', '2018-07-29 18:45:06'),
+(2, 'test', 'c20ad4d76fe97759aa27a0c99bff6710', '2018-08-03 02:35:13');
 
 --
 -- Indexes for dumped tables
@@ -83,12 +79,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `form_data`
 --
 ALTER TABLE `form_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

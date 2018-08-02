@@ -40,7 +40,7 @@ $final_array[] = $result__array ;
  }
  if(isset($output))
  {
-  $to = "sudhirrupani191993@gmail.com";
+  $to = "atinguptajmu@gmail.com,sudhirrupani191993@gmail.com";
   $subject = "Report";
   $link = $_SERVER['HTTP_HOST'].'/file/'.$fname;
 
@@ -59,8 +59,10 @@ $final_array[] = $result__array ;
   </body>
   </html>
   ";
-  $headers = "MIME-Version: 1.0" . "\r\n";
-  $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+    $headers = "From: pixelpro <contact@pixelpro.com>\r\n";
+    $headers .= "X-Priority: 1\r\n";
+    $headers . = "MIME-Version: 1.0" . "\r\n";
+    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
   mail($to,$subject,$message,$headers);
 echo "sucess"; 
 } 

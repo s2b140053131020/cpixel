@@ -56,3 +56,28 @@ margin: 0 auto;
   width:300px !important;
 }
 #get_start{display:none;}
+.dwn
+{
+	height:40px;
+	width:40px;
+}
+table *
+{
+text-align:center !important;	
+}
+#resultdata_paginate a
+{
+cursor:pointer;
+height:40px;
+margin:0px 2px;
+padding:5px 5px;
+font-size:18px;
+border:1px solid black;
+position:relative;	
+background:lightgreen;
+}
+#pbar
+{
+	display:none;
+	margin-top:10px;	
+}
