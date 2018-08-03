@@ -28,7 +28,7 @@ $result__array['status'] = get_data($str);
 $final_array[] = $result__array ;   
  }
 /* Write File*/
-//  print_r($final_array);
+
  if(!empty($final_array)){
       $output = fopen("file/".$fname, "w");
      fputcsv($output,array('Url', 'Status'));       
@@ -38,22 +38,41 @@ $final_array[] = $result__array ;
      }       
      fclose($output);
  }
- if(isset($output))
+  require_once 'connect.php';  
+    $sql = "UPDATE `form_data` SET `status` = '1' WHERE `file_name` ='$fname'";
+    $res = mysqli_query($connection, $sql);
+	if(isset($res))		
  {
   $to = "atinguptajmu@gmail.com,sudhirrupani191993@gmail.com";
-  $subject = "Report";
+  $subject = "Download Your Report";
   $link = $_SERVER['HTTP_HOST'].'/file/'.$fname;
-
   $message = "
   <html>
   <head>
   <title>Download Report</title>
+  <style>
+  a:link, a:visited {
+    background-color: blue;
+    color: white;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size:20px;
+}
+table{
+	width:100%;
+	text-align:center;
+} 
+
+a:hover, a:active {background-color: red;}
+</style>
   </head>
   <body>
   <p></p>
   <table>
   <tr>
-  <td><a href='$link'>Download Report</a></td>
+	<td><a href='$link'>Download Report</a></td>
   </tr>
   </table>
   </body>
@@ -63,8 +82,8 @@ $final_array[] = $result__array ;
     $headers .= "X-Priority: 1\r\n";
     $headers .= "MIME-Version: 1.0\r\n";
     $headers .= "Content-type:text/html;charset=UTF-8\r\n";
-  mail($to,$subject,$message,$headers);
-echo "sucess"; 
+   mail($to,$subject,$message,$headers);
+  echo "sucess"; 
 } 
 else{
   echo "fail";

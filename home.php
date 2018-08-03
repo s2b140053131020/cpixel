@@ -59,7 +59,7 @@ $username = $_SESSION['username'];
       <tbody>
 	  <?php 
   require_once 'connect.php';  
-	$sql = "SELECT * FROM `form_data`  ORDER BY `create_at` DESC";
+	$sql = "SELECT * FROM `form_data` WHERE status = 1  ORDER BY `create_at` DESC";
     $res = mysqli_query($connection, $sql);
 	$i=1;
 	while($row = mysqli_fetch_assoc($res)){
@@ -116,8 +116,6 @@ $(document).ready(function(e){
     });
 
 $('#get_start').click(function(){
-    $('#get_start').attr("disabled","disabled");
-    $('#get_start').css("opacity",".5");
 	$('#pbar').show(100);
 var fname = $('#get_start').attr( "filename");
 $.ajax
@@ -129,15 +127,13 @@ $.ajax
     {
 		$('#pbar').hide(100);
         $('#get_start').hide(1000);
-        $('#get_start').css("opacity","");
-        $(".get_start").removeAttr("disabled");
 		location.reload(true);
     }
 });
 });
-
     //file type validation
     $("#file").change(function() {
+		$('#pbar').hide(100);
         var file = this.files[0];
         var imagefile = file.name;
         a = imagefile.split('.');
