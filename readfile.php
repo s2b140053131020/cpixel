@@ -7,6 +7,7 @@ $file = fopen("file/".$fname,"r");
 
 /* Read url */
 $url_array = array();
+if($file){
 while(! feof($file))
  {
   $url = fgetcsv($file)[0]; 
@@ -17,16 +18,18 @@ while(! feof($file))
     $url_array[] = $url;
   } 
 }
+}
 fclose($file);
 /* check available */
 $final_array = array ();
 foreach ($url_array as $str) 
-{
+{	
 $result__array = array();
 $result__array['url'] = $str;
 $result__array['status'] = get_data($str);
 $final_array[] = $result__array ;   
- }
+}
+
 /* Write File*/
 
  if(!empty($final_array)){

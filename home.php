@@ -59,7 +59,7 @@ $username = $_SESSION['username'];
       <tbody>
 	  <?php 
   require_once 'connect.php';  
-	$sql = "SELECT * FROM `form_data` WHERE status = 1  ORDER BY `create_at` DESC";
+	$sql = "SELECT * FROM `form_data` ORDER BY `create_at` DESC";
     $res = mysqli_query($connection, $sql);
 	$i=1;
 	while($row = mysqli_fetch_assoc($res)){
@@ -67,8 +67,36 @@ $username = $_SESSION['username'];
         <tr>
           <th scope="row"><?php  echo $i; ?></th>
           <td><?php  echo $row['file_name']; ?></td>
-          <td class ="text-success">Done</td>
-          <td><a href="file/<?php  echo $row['file_name']; ?>"><img src="img/dwn.ico" class="dwn"></a></td>
+          <?php 
+		  if($row['status']==1)
+		  {?> 
+		  <td class ="text-success">Done</td>
+		  <?php 
+		  }
+		else{		  
+		  ?> 
+		  <td class ="red">InProgress</td>
+		<?php
+		}
+		?>
+          <td>
+		   <?php 
+		  if($row['status']==1)
+		  {?> 
+		  <a href="file/<?php  echo $row['file_name']; ?>">
+				<img src="img/dwn.ico" class="dwn">
+		  </a>
+		   <?php 
+		  }
+		else{		  
+		  ?> 
+  		  <a href="#">
+				<img src="img/close.ico" class="dwn">
+		  </a>
+		<?php
+		}
+		?>
+		  </td>
 		   <td><?php  echo $row['create_at']; ?></td>
         </tr>
 		
@@ -125,9 +153,10 @@ $.ajax
     type: 'post',
     success: function(result)
     {
+		print_r(result);
 		$('#pbar').hide(100);
         $('#get_start').hide(1000);
-		location.reload(true);
+		// location.reload(true);
     }
 });
 });
