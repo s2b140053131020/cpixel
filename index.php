@@ -27,7 +27,7 @@ if(isset($_POST) & !empty($_POST)){
 ?>
 <html>
 <head>
-<title>User Login Script in PHP & MySQL</title>
+<title>Pixel Pro Scrapping</title>
 <!-- Latest compiled and minified CSS -->
 <?php require_once('function/include_link.php');?>
 </head>

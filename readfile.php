@@ -1,4 +1,5 @@
 <?php 
+ini_set('max_execution_time', 0);
 if(isset($_REQUEST['fname']))
 {
 require_once('function/file_function.php'); 

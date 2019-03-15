@@ -90,9 +90,12 @@ $username = $_SESSION['username'];
 		  }
 		else{		  
 		  ?> 
-  		  <a href="#">
-				<img src="img/close.ico" class="dwn">
-		  </a>
+		  <div class="progress">
+		<div class="progress-bar progress-bar-striped active" role="progressbar"
+			aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+			InProgress.
+  </div>
+</div>
 		<?php
 		}
 		?>

@@ -1,4 +1,5 @@
 <?php
+ini_set('max_execution_time', 0);
 if(isset($_FILES['e_file'])){
     $file_name = $_FILES['e_file']['name'];
     $file_size =$_FILES['e_file']['size'];
