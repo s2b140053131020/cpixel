@@ -41,7 +41,6 @@
 }
 #profileimage {
     cursor: pointer;
-
      width: 100px;
     height: 100px;
   border:2px solid #03b1ce ;}
@@ -79,5 +78,22 @@ background:lightgreen;
 #pbar
 {
 	display:none;
-	margin-top:10px;	
+	margin-top:10px;
+  width:80%;	
 }
+#resultdata_length{
+  display: inline-block !important;
+  }
+
+  #resultdata_filter
+  {
+    display: inline-block !important;
+    float: right !important;
+  }
+.navbar{
+    z-index: 100000;
+    position: sticky;
+    top: 0px;
+    box-shadow: #808080a1 0px -6px 9px 9px;
+    border-radius: 1px !important;
+  }
